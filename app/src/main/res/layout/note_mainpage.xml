@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/liteblue1">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/live_folder_notes" />
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/item_background1"
+        android:hint=" 输入标题或内容" />
+        <ImageButton
+            android:id="@+id/search_bt"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_menu_compose"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/linearLayout"
+        >
+        <ImageButton
+            android:id="@+id/order_pic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"/>
+        <Button
+            android:id="@+id/order_ways"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:background="@color/white"/>
+        <Button
+            android:id="@+id/select_type"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:text="笔记类型"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="80dp"
+            android:background="@color/white"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linearLayout2"
+        android:layout_marginTop="0dp"
+        android:background="#92CED4D9"
+        android:capitalize="sentences"
+        android:fadingEdge="vertical"
+        android:gravity="top"
+        android:padding="5dp"
+        android:scrollbars="vertical"
+        android:textSize="22sp" />
+
+    <ImageButton
+        android:id="@+id/add_bt"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+       android:src="@drawable/ic_menu_edit" />
+</RelativeLayout>

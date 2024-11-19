@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/type_work"
+          android:title="工作类型" />
+    <item android:id="@+id/type_study"
+        android:title="学习类型" />
+    <item android:id="@+id/type_life"
+        android:title="生活类型" />
+    <item android:id="@+id/type_privacy"
+        android:title="隐私类型" />
+    <item android:id="@+id/type_other"
+        android:title="其他类型" />
+</menu>

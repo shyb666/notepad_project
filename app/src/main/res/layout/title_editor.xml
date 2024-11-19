@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  	android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:paddingBottom="3dip">
+    <EditText android:id="@+id/title" 
+        android:maxLines="1" 
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+      	android:ems="25"
+        android:layout_height="wrap_content"
+        android:scrollHorizontally="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="笔记类型"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <Button
+            android:id="@+id/work"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="14dp"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:text="工作"/>
+        <Button
+            android:id="@+id/study"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:text="学习"/>
+        <Button
+            android:id="@+id/daylylife"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:text="生活"/>
+        <Button
+            android:id="@+id/privacy"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:text="私密"/>
+        <Button
+            android:id="@+id/other"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:text="其它"/>
+
+    </LinearLayout>
+    <Button android:id="@+id/ok"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_gravity="right"
+        android:text="@string/button_ok"
+        android:onClick="onClickOk" />
+</LinearLayout>
