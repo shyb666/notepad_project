@@ -4,20 +4,56 @@
 1.时间戳
   实现效果：为每条笔记添加了时间戳（根据修改时间）
   ![图片描述](https://github.com/shyb666/pictures/blob/main/AG2OILXEMYLZLC5%5B%5DIOFWB1.png)
+
+  实现方法：
+  由于该项目的主页与编辑页面原本共用一个布局的设计不利于功能的修改，因此**重新创建了一个主页的布局**(如上图)
+  
+  
+  该项目已经提供了修改时间(modifyed),但是格式为毫秒数，且不显示
+  所以必须修改事件的显示格式，
+  首先在**NotePadProvider类的insert方法中**,修改**新增笔记时设置的时间的格式**
+   ```SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        sdf.setTimeZone(TimeZone.getDefault());
+        Date date=new Date(System.currentTimeMillis());
+        String created_date=sdf.format(date);
+//修改创建时间
+        // If the values map doesn't contain the creation date, sets the value to the current time.
+        if (values.containsKey(NotePad.Notes.COLUMN_NAME_CREATE_DATE) == false) {
+            values.put(NotePad.Notes.COLUMN_NAME_CREATE_DATE, created_date);
+        }
+//把上次修改时间设为创建时间
+        if (values.containsKey(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE) == false) {
+            values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, created_date);
+        } ```
+
+  然后在**NoteEditor类的updateNote方法中**,修改**新增笔记时设置的时间的格式**
+  ```
+ ContentValues values = new ContentValues();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        sdf.setTimeZone(TimeZone.getDefault());
+        Date date=new Date(System.currentTimeMillis());
+        String modification_date=sdf.format(date);
+
+        values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, modification_date);
+ ```
+  
+2.搜索功能
+  实现效果：在搜索框输入内容或标题(此处输入no作为搜索内容)，
+  
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/2JPN_4T2TFPRH6NN0TVPMMH.png)
+  
+  点击搜索按钮，可查询到具有相应内容或标题的笔记条目，
+  
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/p2.png)
+  
+  然后清空搜索框内容
+  若搜索框无内容，此时点击搜索按钮，则查询所有笔记
   实现方法：
   ```bash
 git clone https://github.com/your-username/your-project.git
    cd your-project
  ```
-  
-2.搜索功能
-  实现效果：在搜索框输入内容或标题(此处输入no作为搜索内容)，
-  ![图片描述](https://github.com/shyb666/pictures/blob/main/2JPN_4T2TFPRH6NN0TVPMMH.png)
-  点击搜索按钮，可查询到具有相应内容或标题的笔记条目，
-  ![图片描述](https://github.com/shyb666/pictures/blob/main/p2.png)
-  然后清空搜索框内容
-  若搜索框无内容，此时点击搜索按钮，则查询所有笔记
-  
+
 # 拓展功能
 1.分类管理
   实现效果：在主界面添加了“笔记类型按钮”
