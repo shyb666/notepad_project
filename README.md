@@ -276,6 +276,7 @@ private void showPopupMenu(View v) {
   切换后排列方式为标题后(仍可以修改升降序)
   
   ![图片描述](https://github.com/shyb666/pictures/blob/main/p10.png)
+  
   实现方式： 把项目原本的排列顺序属性拆分为“升降序”(final_order1)和“排列属性”(final_order2)
   
   点击升降序按钮时修改final_order1属性，点击排序方式按钮时修改final_order2属性
@@ -284,9 +285,11 @@ private void showPopupMenu(View v) {
                
 **3.文件储存**
   实现效果：在笔记编辑界面点出右上角的菜单，选择“导出笔记”选项，把当前笔记按一定格式存储到默认的文件存储路径中
+  
    ![图片描述](https://github.com/shyb666/pictures/blob/main/p4.png)
 .
     ![图片描述](https://github.com/shyb666/pictures/blob/main/p11.png)
+    
   首先添加对应菜单文件的菜单项，点击后执行**exportNote()**方法，设置固定格式，实现文件导出，
   
   ```private final void exportNote() {
