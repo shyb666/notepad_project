@@ -9,7 +9,9 @@
   由于该项目的主页与编辑页面原本共用一个布局的设计不利于功能的修改，因此**重新创建了一个主页的布局**(如上图)
   
   该项目已经提供了修改时间(modifyed),但是格式为毫秒数，且不显示
+  
   所以必须修改事件的显示格式，
+  
   首先在**NotePadProvider类的insert方法中**,修改**新增笔记时设置的时间的格式**
    ```
 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -38,6 +40,7 @@ SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, modification_date);
  ```
   实现了修改内容的同时修改表中的modifyed列
+  
   **NoteList类**中修改主页查询时获取的数据类型，**增加modifyed属性，绑定到布局的时间戳组件，并重新设置适配器**
 ```
 String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE,NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,
@@ -65,9 +68,13 @@ String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE,NotePad.Notes.COLUMN_NA
   ![图片描述](https://github.com/shyb666/pictures/blob/main/p2.png)
   
   然后清空搜索框内容
+  
   若搜索框无内容，此时点击搜索按钮，则查询所有笔记
+  
   实现方法：
+  
   首先在新的主页布局文件中添加EditText和Button等必要组件，并进行绑定
+  
   然后为搜索按键添加点击事件，点击时根据搜索框内容重新查询数据，并设置适配器
 
   ```
@@ -112,14 +119,20 @@ b1.setOnClickListener(new View.OnClickListener() {
  ```
 
 其中**init_list()**;方法封装了原本项目在查询所有条目并设置适配器的方法，即当搜索框为空时，查询所有条目
+
 把原本的排列顺序属性拆分为“升降序”(final_order1)和“排列属性”(final_order2)，并重新组成新的排列顺序**final_order**，便于修改排序方式
 
 
 # 拓展功能
 **1.分类管理**
-  实现效果：在主界面添加了“笔记类型按钮”
-          点击显示菜单，可选择查询的类型
-          示例：点击工作类型后，显示所有类型为“工作”的笔记
+  实现效果：为每条笔记添加了类型属性，可在修改标题界面中设置类型
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/p5.png)
+  每个类型有对应的图片，显示在主页ListView的图片上(见主页图)
+  
+  在主界面添加了“笔记类型按钮”，点击后显示菜单，可选择查询的类型
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/p6.png)        
+  示例：点击工作类型后，显示所有类型为“工作”的笔记
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/p7.png)        
           
 **2.ui美化**
   实现效果：修改了主页面的主体风格
