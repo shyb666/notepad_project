@@ -126,14 +126,104 @@ b1.setOnClickListener(new View.OnClickListener() {
 # 拓展功能
 **1.分类管理**
   实现效果：为每条笔记添加了类型属性，可在修改标题界面中设置类型
+  
   ![图片描述](https://github.com/shyb666/pictures/blob/main/p5.png)
+  
   每个类型有对应的图片，显示在主页ListView的图片上(见主页图)
   
   在主界面添加了“笔记类型按钮”，点击后显示菜单，可选择查询的类型
-  ![图片描述](https://github.com/shyb666/pictures/blob/main/p6.png)        
+  
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/p6.png) 
+  
   示例：点击工作类型后，显示所有类型为“工作”的笔记
-  ![图片描述](https://github.com/shyb666/pictures/blob/main/p7.png)        
-          
+  
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/p7.png)   
+  
+  实现方法：
+  首先在数据库更新时新增**type**列，更改数据库版本
+  ```
+  @Override
+       public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+           // Logs that the database is being upgraded
+           Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
+                   + newVersion + ", which will destroy all old data");
+           //添加类
+
+           db.execSQL("ALTER TABLE notes ADD COLUMN type TEXT");
+           // Kills the table and existing data
+           db.execSQL("DROP TABLE IF EXISTS notes");
+
+           // Recreates the database with a new version
+           onCreate(db);
+       }
+       ```
+  在新添加一个适配器**CustomCursorAdapter**(继承自原项目的SimpleCursorAdapter)，用于显示图片  
+重写其中重要方法实现图片显示
+```
+@Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        // 调用super.bindView()来绑定基本的数据
+        super.bindView(view, context, cursor);
+
+        // 获取ImageView
+        ImageView imageView = view.findViewById(R.id.note_type);
+
+        // 获取用于决定图片的条件列的值
+        int columnIndex = cursor.getColumnIndexOrThrow(NotePad.Notes.COLUMN_TYPE);
+        String value = cursor.getString(columnIndex); // 假设这一列是整型，根据实际情况调整
+if(value==null){
+    value="work";
+}
+        // 使用switch语句来设置不同的图片
+        switch (value) {
+            case "work":
+                imageView.setImageResource(R.drawable.work);
+                break;
+            case "study":
+                imageView.setImageResource(R.drawable.study);
+                break;
+            case "other":
+                imageView.setImageResource(R.drawable.other);
+                break;
+            case "daylylife":
+                imageView.setImageResource(R.drawable.life);
+                break;
+            case "privacy":
+                imageView.setImageResource(R.drawable.privacy);
+                break;
+            // 添加更多的case来处理其他值
+            default:
+                imageView.setImageResource(R.drawable.item_background);
+                break;
+        }
+    }
+```
+查询数据时也要新增对**type**属性的查询
+
+修改标题编辑界面，新增各类型的按键，点击时设置本条笔记类型
+在**TitleEditor类**中，先用一个变量接收点击不同按钮对应的类型然后在关闭界面时**设置类型**
+```
+@Override
+    protected void onPause() {
+        super.onPause();
+        if (mCursor != null) {
+            ContentValues values = new ContentValues();
+            values.put(NotePad.Notes.COLUMN_NAME_TITLE, mText.getText().toString());
+
+            //设置类型
+            values.put(NotePad.Notes.COLUMN_TYPE, selected_type);
+            getContentResolver().update(
+                mUri,    // The URI for the note to update.
+                values,  // The values map containing the columns to update and the values to use.
+                null,    // No selection criteria is used, so no "where" columns are needed.
+                null     // No "where" columns are used, so no "where" values are needed.
+            );
+
+        }
+    }
+```
+  
 **2.ui美化**
   实现效果：修改了主页面的主体风格
             为每条笔记根据类型添加了图片
