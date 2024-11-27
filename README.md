@@ -1,7 +1,7 @@
-# notepad_project
+## notepad_project
 期中作业：notepad
-# 基本功能
-1.时间戳
+## 基本功能
+#1.时间戳
   实现效果：为每条笔记添加了时间戳（根据修改时间）
   ![图片描述](https://github.com/shyb666/pictures/blob/main/AG2OILXEMYLZLC5%5B%5DIOFWB1.png)
 
