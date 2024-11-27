@@ -261,16 +261,72 @@ private void showPopupMenu(View v) {
     }
 ```
 
-**2.ui美化**
+**2.排序管理**
+  实现效果：点击“升序降序”按钮可切换笔记的升序降序排列
+  切换前
+  
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/p8.png)
+  
+  切换后
+  
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/p9.png)
+  
+  点击“排列方式”按钮可依次切换笔记的排列方式（排列方式默认为根据修改时间，然后是根据标题，根据创建时间）
+  
+  切换后排列方式为标题后(仍可以修改升降序)
+  
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/p10.png)
+  实现方式： 把项目原本的排列顺序属性拆分为“升降序”(final_order1)和“排列属性”(final_order2)
+  
+  点击升降序按钮时修改final_order1属性，点击排序方式按钮时修改final_order2属性
+
+  每次查询之前，把**final_order1**和**final_order2**属性合并为**final_order**属性用于排序，代码相对简单
+  
+             
+**3.文件储存**
+  实现效果：在笔记编辑界面点出右上角的菜单，选择“导出笔记”选项，把当前笔记按一定格式存储到默认的文件存储路径中
+  
+  首先添加对应菜单文件的菜单项，点击后执行**exportNote()**方法，设置固定格式，实现文件导出，
+  
+  ```private final void exportNote() {
+        if (mCursor != null && mCursor.moveToFirst()) {
+            // 获取笔记数据
+            int id=mCursor.getInt(mCursor.getColumnIndexOrThrow("_id"));
+            String title = mCursor.getString(mCursor.getColumnIndexOrThrow("title"));
+            String note = mCursor.getString(mCursor.getColumnIndexOrThrow("note"));
+            String updateTime = mCursor.getString(mCursor.getColumnIndexOrThrow("modified"));
+            // 准备导出的文本内容
+            String content = "Title: " + title + "\n" +
+                    "ID: " + id + "\n" +
+                    "Note: " + note + "\n" +
+                    "Updated: " + updateTime + "\n";
+
+            // 导出为文本文件
+            File file = new File(this.getExternalFilesDir(null), "note_" + title + ".txt");
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                fos.write(content.getBytes());
+                Toast.makeText(this, "Succeed to export note"+ id+"||"
+                        +file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Failed to export note", Toast.LENGTH_SHORT).show();
+                if (mCursor != null) mCursor.close();
+                return;
+            }
+
+        } else {
+            Toast.makeText(this, "Note not found", Toast.LENGTH_SHORT).show();
+            if (mCursor != null) mCursor.close();
+        }
+
+    }
+```
+  
+**4.ui美化**
   实现效果：修改了主页面的主体风格
             为每条笔记根据类型添加了图片
             在主页面顶部添加了软件图标，搜索框，搜索按钮
             添加了排序按钮和分类选择按钮
             主页面右下方添加了“新增笔记”按钮
-
-**3.排序管理**
-  实现效果：点击“升序降序”按钮可切换笔记的升序降序排列
-                点击“排列方式”按钮可依次切换笔记的排列方式（排列方式默认为根据修改时间，然后是根据标题，根据创建时间）
-                
-**4.文件储存**
-  实现效果：在笔记编辑界面点出右上角的菜单，选择“导出笔记”选项，把当前笔记按一定格式存储到默认的文件存储路径中
+            
+  
