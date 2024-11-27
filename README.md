@@ -25,9 +25,8 @@
         if (values.containsKey(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE) == false) {
             values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, created_date);
         } ```
-
   然后在**NoteEditor类的updateNote方法中**,修改**新增笔记时设置的时间的格式**
-  ```
+
  ContentValues values = new ContentValues();
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         sdf.setTimeZone(TimeZone.getDefault());
