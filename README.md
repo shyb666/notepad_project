@@ -3,7 +3,7 @@
 # 基本功能
 1.时间戳
   实现效果：为每条笔记添加了时间戳（根据修改时间）
-  ![图片描述](https://github.com/shyb666/pictures/blob/main/2JPN_4T2TFPRH6NN0TVPMMH.png)
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/AG2OILXEMYLZLC5%5B%5DIOFWB1.png)
 2.搜索功能
   实现效果：在搜索框输入内容或标题，点击搜索按钮，可查询到具有相应内容或标题的笔记条目，然后清空搜索框内容
             若搜索框无内容，此时点击搜索按钮，则查询所有笔记
