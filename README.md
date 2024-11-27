@@ -142,7 +142,7 @@ b1.setOnClickListener(new View.OnClickListener() {
   实现方法：
   首先在数据库更新时新增**type**列，更改数据库版本
   ```
-  @Override
+@Override
        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
            // Logs that the database is being upgraded
@@ -157,9 +157,11 @@ b1.setOnClickListener(new View.OnClickListener() {
            // Recreates the database with a new version
            onCreate(db);
        }
-       ```
+```
+
   在新添加一个适配器**CustomCursorAdapter**(继承自原项目的SimpleCursorAdapter)，用于显示图片  
 重写其中重要方法实现图片显示
+
 ```
 @Override
     public void bindView(View view, Context context, Cursor cursor) {
@@ -202,7 +204,7 @@ if(value==null){
 查询数据时也要新增对**type**属性的查询
 
 修改标题编辑界面，新增各类型的按键，点击时设置本条笔记类型
-在**TitleEditor类**中，先用一个变量接收点击不同按钮对应的类型然后在关闭界面时**设置类型**
+在**TitleEditor类**中，先用一个变量**selected_type**接收点击不同按钮对应的类型然后在关闭界面时**设置类型**
 ```
 @Override
     protected void onPause() {
@@ -219,11 +221,46 @@ if(value==null){
                 null,    // No selection criteria is used, so no "where" columns are needed.
                 null     // No "where" columns are used, so no "where" values are needed.
             );
-
         }
     }
 ```
-  
+让主页的“类型查询”按键点击时显示菜单，为对应菜单项添加对应的类型查询(selectByType实现方法类似于搜索功能的实现，不再重复)
+```
+select_type.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
+        });
+  ```
+```
+private void showPopupMenu(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.type_select_menu, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId()==R.id.type_work){
+                    selectByType("work");
+                } else if (item.getItemId()==R.id.type_study) {
+                    selectByType("study");
+                }else if (item.getItemId()==R.id.type_life) {
+                    selectByType("daylylife");
+                }else if (item.getItemId()==R.id.type_privacy) {
+                    selectByType("privacy");
+                }else if (item.getItemId()==R.id.type_other) {
+                    selectByType("other");
+                }
+                return true;
+            }
+        });
+
+        popup.show();
+    }
+```
+
 **2.ui美化**
   实现效果：修改了主页面的主体风格
             为每条笔记根据类型添加了图片
