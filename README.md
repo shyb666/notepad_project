@@ -16,15 +16,16 @@
         sdf.setTimeZone(TimeZone.getDefault());
         Date date=new Date(System.currentTimeMillis());
         String created_date=sdf.format(date);
-//修改创建时间
+          //修改创建时间
         // If the values map doesn't contain the creation date, sets the value to the current time.
         if (values.containsKey(NotePad.Notes.COLUMN_NAME_CREATE_DATE) == false) {
             values.put(NotePad.Notes.COLUMN_NAME_CREATE_DATE, created_date);
         }
-//把上次修改时间设为创建时间
+       //把上次修改时间设为创建时间
         if (values.containsKey(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE) == false) {
             values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, created_date);
-        } ```
+        }
+```
 
   然后在**NoteEditor类的updateNote方法中**,修改**新增笔记时设置的时间的格式**
 
@@ -34,7 +35,6 @@
         sdf.setTimeZone(TimeZone.getDefault());
         Date date=new Date(System.currentTimeMillis());
         String modification_date=sdf.format(date);
-
         values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, modification_date);
  ```
   
