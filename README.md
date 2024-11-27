@@ -4,6 +4,11 @@
 1.时间戳
   实现效果：为每条笔记添加了时间戳（根据修改时间）
   ![图片描述](https://github.com/shyb666/pictures/blob/main/AG2OILXEMYLZLC5%5B%5DIOFWB1.png)
+  实现方法：
+  ```bash
+git clone https://github.com/your-username/your-project.git
+   cd your-project
+
   
 2.搜索功能
   实现效果：在搜索框输入内容或标题(此处输入no作为搜索内容)，
