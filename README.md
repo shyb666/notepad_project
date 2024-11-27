@@ -11,7 +11,8 @@
   该项目已经提供了修改时间(modifyed),但是格式为毫秒数，且不显示
   所以必须修改事件的显示格式，
   首先在**NotePadProvider类的insert方法中**,修改**新增笔记时设置的时间的格式**
-   ```SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+   ```
+SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         sdf.setTimeZone(TimeZone.getDefault());
         Date date=new Date(System.currentTimeMillis());
         String created_date=sdf.format(date);
@@ -38,7 +39,8 @@
  ```
   实现了修改内容的同时修改表中的modifyed列
   **NoteList类**中修改主页查询时获取的数据类型，**增加modifyed属性，绑定到布局的时间戳组件，并重新设置适配器**
-``` String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE,NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,
+```
+String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE,NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,
                 } ;
         int[] viewIDs = { android.R.id.text1,android.R.id.text2};
         CustomCursorAdapter adapter = new CustomCursorAdapter(
@@ -68,7 +70,8 @@
   首先在新的主页布局文件中添加EditText和Button等必要组件，并进行绑定
   然后为搜索按键添加点击事件，点击时根据搜索框内容重新查询数据，并设置适配器
 
-  ```b1.setOnClickListener(new View.OnClickListener() {
+  ```
+b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final_order=final_order1+final_order2;
