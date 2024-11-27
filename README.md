@@ -37,6 +37,7 @@
         String modification_date=sdf.format(date);
         values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, modification_date);
  ```
+  实现了修改内容的同时修改表中的modifyed列
   
 2.搜索功能
   实现效果：在搜索框输入内容或标题(此处输入no作为搜索内容)，
