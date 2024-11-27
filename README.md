@@ -9,7 +9,7 @@
   实现效果：在搜索框输入内容或标题(此处输入no作为搜索内容)，
   ![图片描述](https://github.com/shyb666/pictures/blob/main/2JPN_4T2TFPRH6NN0TVPMMH.png)
   点击搜索按钮，可查询到具有相应内容或标题的笔记条目，
-  ![图片描述](https://github.com/shyb666/pictures/blob/main/%60H(%5BPL~KPV4%7DO%24RG%25TZW%25B9.png)
+  ![图片描述](https://github.com/shyb666/pictures/blob/main/%60H(%5BPL~KPV4%7DO%24RG%25TZW%25B9.png))
   然后清空搜索框内容
   若搜索框无内容，此时点击搜索按钮，则查询所有笔记
   
